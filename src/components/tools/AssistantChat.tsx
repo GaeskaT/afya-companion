@@ -9,6 +9,32 @@ import type { NutritionProfile } from "@/lib/nutrition";
 import { offlineAssistant, type AssistantReply } from "@/lib/assistantOffline";
 import { IS_DEMO } from "@/lib/env";
 
+/**
+ * Answers arrive with light markdown — **bold** headings and an _italic_
+ * closing note — from both the offline library and the model. Render just
+ * those two, as React nodes rather than injected HTML.
+ */
+function RichText({ text }: { text: string }) {
+  const pieces = text.split(/(\*\*[^*]+\*\*|_[^_]+_)/g);
+  return (
+    <>
+      {pieces.map((piece, i) => {
+        if (piece.startsWith("**") && piece.endsWith("**")) {
+          return <strong key={i}>{piece.slice(2, -2)}</strong>;
+        }
+        if (piece.startsWith("_") && piece.endsWith("_") && piece.length > 2) {
+          return (
+            <em key={i} className="text-muted">
+              {piece.slice(1, -1)}
+            </em>
+          );
+        }
+        return <span key={i}>{piece}</span>;
+      })}
+    </>
+  );
+}
+
 const SUGGESTIONS = [
   "What should I eat during chemotherapy?",
   "Cheap high-protein meals for one person",
@@ -129,7 +155,7 @@ export function AssistantChat() {
             }
           >
             <p className="whitespace-pre-wrap text-[0.95rem] leading-relaxed">
-              {message.text}
+              <RichText text={message.text} />
             </p>
             {message.engine && (
               <p className="mt-2 text-[0.68rem] text-muted">via {message.engine}</p>
