@@ -48,6 +48,110 @@ const RED_FLAGS: { pattern: RegExp; message: string }[] = [
   },
 ];
 
+/**
+ * Symptoms that block eating but have no treatment guide of their own. Each
+ * one gets the advice a dietitian would give first, plus where to read more.
+ */
+const SYMPTOM_TIPS: {
+  pattern: RegExp;
+  title: string;
+  tips: string[];
+  link?: { href: string; label: string };
+}[] = [
+  {
+    pattern: /(sore|painful|ulcer)\w* (mouth|throat)|mouth (sore|ulcer|pain)|mucositis|oral thrush|thrush/i,
+    title: "A sore mouth",
+    tips: [
+      "Soft, moist, cool foods: porridge, custard, yoghurt, ice cream, smooth soup, scrambled egg, mashed potato with plenty of butter.",
+      "Add sauce, gravy or cream to everything — dryness hurts more than texture does.",
+      "Avoid acidic, salty, spicy, rough or very hot foods: citrus, tomato, vinegar, crisps, toast crusts.",
+      "Cold works as pain relief. Try ice chips, ice lollies, chilled melon or frozen grapes before eating.",
+      "Rinse with warm salt and bicarbonate water four times a day; avoid alcohol-based mouthwashes.",
+      "Drink through a straw if particular areas are sore.",
+      "Fortify what you can manage — a sore mouth is one of the fastest routes to weight loss.",
+      "Ask the team about mouth care, pain relief before meals, and treatment for thrush if there are white patches.",
+    ],
+    link: { href: "/nutrition/diets/soft-texture", label: "Soft & texture-modified diet" },
+  },
+  {
+    pattern: /(taste|tastes?) (change|different|funny|metallic|nothing)|metallic taste|can'?t taste|lost my taste/i,
+    title: "Taste changes",
+    tips: [
+      "Use plastic or wooden cutlery if food tastes metallic.",
+      "Marinate meat, or switch to eggs, dairy, fish and pulses if meat tastes wrong.",
+      "Sharpen flavours with herbs, lemon, ginger, pickle or chilli — within tolerance if the mouth is sore.",
+      "Cold food tastes stronger to some people and weaker to others; try both.",
+      "Rinse the mouth before eating, and keep up mouth care — coating dulls taste further.",
+      "Taste usually recovers over weeks to months after treatment ends.",
+    ],
+  },
+  {
+    pattern: /dry mouth|xerostomia/i,
+    title: "A dry mouth",
+    tips: [
+      "Sip fluid with every mouthful, and keep a drink within reach at all times.",
+      "Add sauce, gravy or custard to everything; avoid dry crumbly food.",
+      "Try sugar-free chewing gum or sour sweets to stimulate saliva, if the mouth is not sore.",
+      "Ask about artificial saliva products and about medications that may be causing it.",
+      "Keep the lips moist, and keep up mouth care — dryness raises the risk of infection and decay.",
+    ],
+  },
+  {
+    pattern: /constipat|not (been able to )?(open my bowels|go to the toilet)/i,
+    title: "Constipation",
+    tips: [
+      "Fluid first — extra fibre without extra fluid makes it worse.",
+      "Increase fibre gradually: oats, fruit, vegetables, pulses.",
+      "Gentle movement helps more than most people expect.",
+      "If you are on opioid painkillers, you need a prescribed laxative — this will not resolve with diet alone.",
+      "Tell the team if nothing has moved for three days, or if there is pain, vomiting or a swollen abdomen.",
+    ],
+  },
+  {
+    pattern: /diarrh|loose stool|the runs/i,
+    title: "Diarrhoea",
+    tips: [
+      "Replace fluid and salts — oral rehydration solution, or water with a little salt and sugar.",
+      "Small frequent meals; lower fibre until it settles.",
+      "Bananas, white rice, white toast, potatoes and plain crackers are usually well tolerated.",
+      "Limit caffeine, alcohol, very fatty food and sugar-free sweeteners for now.",
+      "Contact the team if it is more than four times above normal, contains blood, or comes with fever or dizziness.",
+    ],
+  },
+];
+
+/** How people actually phrase each condition and each diet. */
+const CONDITION_KEYWORDS: Record<string, RegExp> = {
+  diabetes: /diabet|blood sugar|blood glucose|insulin/i,
+  hypertension: /blood pressure|hypertens/i,
+  "heart-disease": /heart (disease|failure|attack)|cardiac|cholesterol|angina/i,
+  "kidney-disease": /kidney|renal|dialysis|ckd/i,
+  "liver-disease": /liver|cirrhos|hepatic|ascites/i,
+  cancer: /cancer|oncolog|tumour|tumor/i,
+  hiv: /\bhiv\b|antiretroviral|\barvs?\b/i,
+  "stroke-recovery": /stroke/i,
+  gastrointestinal: /\bibs\b|\bibd\b|crohn|colitis|coeliac|celiac|reflux|stoma|gut|bowel/i,
+  obesity: /lose weight|weight loss|obes|slimming/i,
+  malnutrition: /malnutri|losing weight|underweight|gain weight|put on weight|build me up/i,
+  thyroid: /thyroid|levothyroxine/i,
+  pregnancy: /pregnan|gestational/i,
+};
+
+const DIET_KEYWORDS: Record<string, RegExp> = {
+  diabetic: /diabet/i,
+  renal: /renal|kidney|dialysis/i,
+  "low-sodium": /low.?(salt|sodium)|less salt|reduce (the )?salt|salt intake/i,
+  cardiac: /cardiac|heart|cholesterol/i,
+  "high-protein": /high.?protein|build (up|muscle)|gain weight|put on weight/i,
+  "weight-management": /lose weight|weight management|slimming/i,
+  "soft-texture": /soft diet|pur[ée]e|texture|swallow/i,
+  "cancer-nutrition": /cancer|chemo/i,
+  "pregnancy-nutrition": /pregnan/i,
+  "child-nutrition": /child|toddler|\bkids?\b/i,
+  "elderly-nutrition": /elderly|older (adult|person|people)|frail/i,
+  "vegetarian-vegan": /vegetarian|vegan|plant.?based/i,
+};
+
 export function offlineAssistant(
   question: string,
   context?: { conditions?: string[]; goal?: string },
@@ -64,13 +168,15 @@ export function offlineAssistant(
     }
   }
 
-  // Condition match
-  const condition = NUTRITION_CONDITIONS.find(
-    (c) =>
-      q.includes(c.slug.replace(/-/g, " ")) ||
-      q.includes(c.name.toLowerCase()) ||
-      (context?.conditions ?? []).includes(c.slug),
-  );
+  // Condition match. People type "kidney diet" and "blood sugar", not slugs.
+  const condition =
+    NUTRITION_CONDITIONS.find((c) => CONDITION_KEYWORDS[c.slug]?.test(question)) ??
+    NUTRITION_CONDITIONS.find(
+      (c) =>
+        q.includes(c.slug.replace(/-/g, " ")) ||
+        q.includes(c.name.toLowerCase()) ||
+        (context?.conditions ?? []).includes(c.slug),
+    );
 
   // Symptom / treatment match
   const guide = TREATMENT_GUIDES.find((g) => {
@@ -88,6 +194,17 @@ export function offlineAssistant(
     };
     return keys[g.slug]?.test(question);
   });
+
+  const symptom = SYMPTOM_TIPS.find((s) => s.pattern.test(question));
+  if (symptom) {
+    parts.push(`**${symptom.title}** — what usually helps:`);
+    parts.push(symptom.tips.map((t) => `• ${t}`).join("\n"));
+    if (symptom.link) links.push(symptom.link);
+    links.push({
+      href: "/nutrition/treatment#appetite-loss",
+      label: "Eating when treatment gets in the way",
+    });
+  }
 
   if (guide) {
     parts.push(`**${guide.name}** — ${guide.summary}`);
@@ -151,10 +268,18 @@ export function offlineAssistant(
     );
   }
 
-  const diet = THERAPEUTIC_DIETS.find((d) =>
-    q.includes(d.name.toLowerCase().replace(" diet", "")),
-  );
+  const diet =
+    THERAPEUTIC_DIETS.find((d) => DIET_KEYWORDS[d.slug]?.test(question)) ??
+    THERAPEUTIC_DIETS.find((d) =>
+      q.includes(d.name.toLowerCase().replace(" diet", "")),
+    );
   if (diet) {
+    // Only spell the plan out when nothing more specific has answered already,
+    // so a chemotherapy question doesn't get a diet lecture appended to it.
+    if (!guide && !condition && !symptom) {
+      parts.push(`**${diet.name}** — ${diet.purpose}`);
+      parts.push(diet.principles.slice(0, 4).map((p) => `• ${p}`).join("\n"));
+    }
     links.push({ href: `/nutrition/diets/${diet.slug}`, label: diet.name });
   }
 
