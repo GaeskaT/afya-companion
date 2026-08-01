@@ -29,6 +29,25 @@ device-local anyway, behaves exactly as in a full deployment.
 - Anticipatory grief (12 topics) and bereavement (11 topics)
 - 12 disease-specific entries (cancer, diabetes, kidney, stroke, heart, dementia, Parkinson's, HIV, chronic pain, MS, terminal illness, rare disease), each covering emotional / family / caregiver challenges, coping and resources
 
+**Onboarding** — `/join`
+
+Five roles register through one wizard driven by `src/content/onboarding.ts`:
+
+| Role | Access | Required documents |
+| --- | --- | --- |
+| Patient | Immediate | — |
+| Family member | Immediate | Power of attorney, only if acting on someone's behalf |
+| Counsellor / psychologist | Verified, 5–10 days | Degree, council registration, practising certificate, indemnity insurance, police clearance, supervision confirmation, photo ID |
+| Dietitian / nutritionist | Verified, 5–10 days | Degree, council registration, practising certificate, indemnity insurance, police clearance, photo ID |
+| Caregiver — individual | Verified, 10–15 days | Care or nursing qualification, first aid/BLS, police clearance, occupational health and immunisation record, two references, photo ID (plus nursing registration where they claim it) |
+| Caregiver — organisation (hospice, agency, nursing home, hospital) | Verified, 10–15 days | Facility operating licence, company or NPO registration, tax compliance, named clinician's registration, indemnity and public liability insurance, safeguarding policy, staff vetting statement, signatory ID |
+
+The wizard saves drafts to the device as you type, validates per step, records
+the issuing body / certificate number / issue and expiry dates alongside each
+upload, flags expired documents before submission, and ends with declarations
+that are specific about scope of practice, escalation and notification duties.
+Files are capped at 5 MB and limited to PDF or images.
+
 **Nutrition & dietetics** — `/nutrition`
 
 - 13 condition-specific guides (foods, limits, timing, portions, sample day, myths, treatment challenges, when to see a dietitian)
@@ -89,6 +108,15 @@ call fails — the same question is answered from the app's own content library
 (`src/lib/assistantOffline.ts`), including red-flag detection for choking,
 weight loss, blood loss and self-harm.
 
+**Registration documents are the most sensitive thing here.** A caregiver
+application carries identity documents, a police clearance, occupational health
+records and professional registration numbers — everything an identity thief
+would want, in one folder. `/api/registration` validates type and size, refuses
+path traversal in filenames, and writes to `data/uploads/<reference>/`, which is
+gitignored. That is adequate for development and **not** adequate for real
+applicants: see the warning at the top of `src/app/api/registration/route.ts`
+for what production storage has to add.
+
 ## Build modes
 
 | Command | Result |
@@ -105,10 +133,13 @@ weight loss, blood loss and self-harm.
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-Booking requests append to `data/bookings.jsonl`; community posts append to
-`data/community-queue.jsonl`. Both are gitignored. **These files contain health
-information** — swap `persist()` for a system with the right access controls
-and retention policy before this serves real patients.
+Booking requests append to `data/bookings.jsonl`, community posts to
+`data/community-queue.jsonl`, and registrations to `data/registrations.jsonl`
+with their uploads under `data/uploads/`. All are gitignored. **These files
+contain health information and identity documents** — swap the `persist()`
+calls for storage with encryption at rest, named-staff access with an audit
+trail, virus scanning on upload, and a retention schedule before this serves
+real people.
 
 ## Structure
 

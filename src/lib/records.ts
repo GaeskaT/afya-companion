@@ -14,7 +14,11 @@ export const KEYS = {
   weights: "weights",
   assistant: "assistant-thread",
   bookings: "bookings",
+  applications: "applications",
 } as const;
+
+/** Draft registrations are kept per role, so a half-finished one survives a reload. */
+export const draftKey = (role: string) => `application-draft:${role}`;
 
 export type Profile = {
   name: string;

@@ -43,6 +43,11 @@ export default function CareHubPage() {
           title="Community"
           description="Moderated, anonymous spaces for patients, caregivers, families, the bereaved — and a memorial wall."
         />
+        <LinkCard
+          href="/join"
+          title="Join CareCircle"
+          description="Register as a patient, family member, counsellor, dietitian or caregiver — including hospices and care institutions."
+        />
       </Grid>
 
       <Disclaimer />

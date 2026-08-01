@@ -74,6 +74,13 @@ export const SITE_MAP: NavGroup[] = [
     ],
   },
   {
+    title: "Join CareCircle",
+    links: [
+      { href: "/join", label: "Register" },
+      { href: "/join/status", label: "Application status" },
+    ],
+  },
+  {
     title: "About",
     links: [
       { href: "/about", label: "About CareCircle" },
