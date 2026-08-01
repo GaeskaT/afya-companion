@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Callout } from "@/components/ui";
 import { uid, useLocalState } from "@/lib/storage";
 import { KEYS, type BookingRecord } from "@/lib/records";
+import { DEMO_NOTE, IS_DEMO } from "@/lib/env";
 
 export function BookingForm({
   kind,
@@ -27,6 +28,15 @@ export function BookingForm({
     event.preventDefault();
     setState("sending");
     setMessage("");
+
+    if (IS_DEMO) {
+      setState("sent");
+      setName("");
+      setContact("");
+      setNotes("");
+      return;
+    }
+
     try {
       const response = await fetch("/api/booking", {
         method: "POST",
@@ -63,6 +73,19 @@ export function BookingForm({
       setState("error");
       setMessage(err instanceof Error ? err.message : "Could not send the request.");
     }
+  }
+
+  if (state === "sent" && IS_DEMO) {
+    return (
+      <div className="space-y-4">
+        <Callout tone="info" title="Demo — nothing was sent">
+          {DEMO_NOTE}
+        </Callout>
+        <button type="button" className="btn btn-ghost" onClick={() => setState("idle")}>
+          Back to the form
+        </button>
+      </div>
+    );
   }
 
   if (state === "sent") {
@@ -191,9 +214,9 @@ export function BookingForm({
       </label>
 
       <Callout tone="info">
-        This request is sent to the service. Unlike the rest of the app, this
-        form does leave your device — only send what you are comfortable
-        sharing.
+        {IS_DEMO
+          ? DEMO_NOTE
+          : "This request is sent to the service. Unlike the rest of the app, this form does leave your device — only send what you are comfortable sharing."}
       </Callout>
 
       {state === "error" && <Callout tone="warn">{message}</Callout>}

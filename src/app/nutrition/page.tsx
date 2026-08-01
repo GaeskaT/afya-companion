@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Disclaimer, Grid, LinkCard, Page, PageHeader, SectionTitle } from "@/components/ui";
 import { NUTRITION_CONDITIONS } from "@/content/nutrition/conditions";
 import { THERAPEUTIC_DIETS } from "@/content/nutrition/diets";
@@ -60,13 +61,13 @@ export default function NutritionHubPage() {
         />
         <div className="flex flex-wrap gap-2">
           {NUTRITION_CONDITIONS.map((condition) => (
-            <a
+            <Link
               key={condition.slug}
               href={`/nutrition/conditions/${condition.slug}`}
               className="btn btn-ghost text-sm"
             >
               {condition.name}
-            </a>
+            </Link>
           ))}
         </div>
       </section>

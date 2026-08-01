@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Callout } from "@/components/ui";
 import { COMMUNITY_RULES, COMMUNITY_SPACES } from "@/content/counselling";
+import { DEMO_NOTE, IS_DEMO } from "@/lib/env";
 
 /** Seeded posts so a new space is never an empty, discouraging room. */
 const SEED: Record<string, { name: string; when: string; text: string }[]> = {
@@ -74,6 +75,13 @@ export function CommunityBoard() {
     event.preventDefault();
     if (text.trim().length < 5) return;
     setState("sending");
+
+    if (IS_DEMO) {
+      setState("sent");
+      setText("");
+      return;
+    }
+
     try {
       const response = await fetch("/api/community", {
         method: "POST",
@@ -140,9 +148,10 @@ export function CommunityBoard() {
           onChange={(e) => setText(e.target.value)}
         />
         {state === "sent" && (
-          <Callout tone="good">
-            Sent for moderation. Every post is read by a moderator before it
-            appears — usually within a day.
+          <Callout tone={IS_DEMO ? "info" : "good"}>
+            {IS_DEMO
+              ? DEMO_NOTE
+              : "Sent for moderation. Every post is read by a moderator before it appears — usually within a day."}
           </Callout>
         )}
         {state === "error" && <Callout tone="warn">{error}</Callout>}

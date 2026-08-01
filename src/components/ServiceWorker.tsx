@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { BASE_PATH } from "@/lib/env";
 
 /**
  * Registers the offline service worker. Kept out of production-only gating on
@@ -13,7 +14,7 @@ export function ServiceWorker() {
       return;
     }
     const register = () => {
-      navigator.serviceWorker.register("/sw.js").catch(() => {
+      navigator.serviceWorker.register(`${BASE_PATH}/sw.js`).catch(() => {
         /* offline support is a bonus, never a blocker */
       });
     };

@@ -5,10 +5,18 @@
 A mobile + web app (installable PWA) that addresses three people at once: the
 person who is ill, the person caring for them, and the family around them.
 
+**Live demo:** https://gaeskat.github.io/carecircle/
+
 ```bash
 npm install
 npm run dev     # http://localhost:3500
 ```
+
+The demo is a static export with no server behind it, so the booking and
+community forms say plainly that nothing is sent, and the nutrition assistant
+answers from its built-in library instead of a language model — the same
+fallback the app uses when there is no signal. Everything else, which is
+device-local anyway, behaves exactly as in a full deployment.
 
 ## What's in it
 
@@ -80,6 +88,15 @@ diagnosis, dosing and individual renal targets. Without a key — or when the
 call fails — the same question is answered from the app's own content library
 (`src/lib/assistantOffline.ts`), including red-flag detection for choking,
 weight loss, blood loss and self-harm.
+
+## Build modes
+
+| Command | Result |
+| --- | --- |
+| `npm run build` | Full server build. API routes work: booking, moderation queue, model-backed assistant. |
+| `NEXT_PUBLIC_DEMO=1 NEXT_PUBLIC_BASE_PATH=/carecircle npm run build` | Static export to `out/` for GitHub Pages. CI drops `src/app/api` first; forms and assistant degrade as described above. |
+
+`.github/workflows/pages.yml` runs the second on every push to `main`.
 
 ## Configuration
 

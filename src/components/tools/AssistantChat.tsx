@@ -6,6 +6,8 @@ import { Callout } from "@/components/ui";
 import { uid, useLocalState } from "@/lib/storage";
 import { KEYS, type AssistantMessage } from "@/lib/records";
 import type { NutritionProfile } from "@/lib/nutrition";
+import { offlineAssistant, type AssistantReply } from "@/lib/assistantOffline";
+import { IS_DEMO } from "@/lib/env";
 
 const SUGGESTIONS = [
   "What should I eat during chemotherapy?",
@@ -41,35 +43,43 @@ export function AssistantChat() {
     };
     setThread([...thread, userMessage]);
 
+    const context = profile
+      ? { conditions: profile.conditions, goal: profile.goal, appetite: profile.appetite }
+      : undefined;
+
+    // The offline library runs in the browser too, so a missing server, a
+    // dropped signal or a static demo build all still get a real answer.
+    const localReply = () => offlineAssistant(text, context);
+
     try {
-      const response = await fetch("/api/assistant", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          question: text,
-          profile: profile
-            ? { conditions: profile.conditions, goal: profile.goal, appetite: profile.appetite }
-            : null,
-        }),
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error ?? "Something went wrong.");
+      const reply: AssistantReply = IS_DEMO
+        ? localReply()
+        : await fetch("/api/assistant", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ question: text, profile: context ?? null }),
+          })
+            .then(async (response) => {
+              if (!response.ok) throw new Error("no server");
+              return (await response.json()) as AssistantReply;
+            })
+            .catch(() => localReply());
 
       setThread((prev) => [
         ...prev,
         {
           id: uid(),
           role: "assistant",
-          text: data.answer,
+          text: reply.answer,
           at: new Date().toISOString(),
-          engine: data.engine,
+          engine: reply.engine,
         },
       ]);
-      setLinks(data.links ?? []);
-      setEscalate(data.escalate ?? null);
+      setLinks(reply.links ?? []);
+      setEscalate(reply.escalate ?? null);
     } catch {
       setError(
-        "Could not reach the assistant. If you are offline, the rest of the nutrition section still works — try the condition guides or the assessment.",
+        "Something went wrong answering that. The rest of the nutrition section still works — try the condition guides or the assessment.",
       );
     } finally {
       setBusy(false);
@@ -83,6 +93,14 @@ export function AssistantChat() {
         does not diagnose, does not prescribe, and will not give individual
         kidney, liver or fluid-restriction targets — those come from your own
         dietitian, from your blood results.
+        {IS_DEMO && (
+          <>
+            {" "}
+            This public demo has no server, so answers come from the built-in
+            library rather than a language model — the same fallback the app
+            uses when you have no signal.
+          </>
+        )}
       </Callout>
 
       {thread.length === 0 && (

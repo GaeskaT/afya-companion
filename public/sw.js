@@ -10,7 +10,17 @@ const VERSION = "cc-v1";
 const SHELL = `${VERSION}-shell`;
 const RUNTIME = `${VERSION}-runtime`;
 
-const PRECACHE = ["/", "/offline", "/care/crisis", "/tools/breathing"];
+/* Everything is scope-relative so the same worker serves both a root
+   deployment and a subpath one (GitHub Pages at /carecircle/). */
+const BASE = new URL(self.registration.scope).pathname.replace(/\/$/, "");
+const OFFLINE = `${BASE}/offline`;
+
+const PRECACHE = [
+  `${BASE}/`,
+  OFFLINE,
+  `${BASE}/care/crisis`,
+  `${BASE}/tools/breathing`,
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -43,7 +53,7 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
-  if (url.pathname.startsWith("/api/")) return;
+  if (url.pathname.startsWith(`${BASE}/api/`)) return;
 
   if (request.mode === "navigate") {
     event.respondWith(
@@ -56,7 +66,7 @@ self.addEventListener("fetch", (event) => {
         .catch(() =>
           caches
             .match(request)
-            .then((cached) => cached || caches.match("/offline")),
+            .then((cached) => cached || caches.match(OFFLINE)),
         ),
     );
     return;

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Disclaimer, Grid, LinkCard, Page, PageHeader, SectionTitle } from "@/components/ui";
 import { SUPPORT_SECTIONS } from "@/content/registry";
 import { CONDITIONS } from "@/content/conditions";
@@ -78,13 +79,13 @@ export default function SupportHubPage() {
         />
         <div className="flex flex-wrap gap-2">
           {CONDITIONS.map((condition) => (
-            <a
+            <Link
               key={condition.slug}
               href={`/support/conditions/${condition.slug}`}
               className="btn btn-ghost text-sm"
             >
               {condition.name}
-            </a>
+            </Link>
           ))}
         </div>
       </section>
