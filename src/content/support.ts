@@ -872,6 +872,190 @@ export const CAREGIVER_TOPICS: Topic[] = [
       { href: "/support/family/financial-stress", label: "Financial stress" },
     ],
   },
+  {
+    slug: "caregiver-grief",
+    title: "Grief while you are still caring",
+    summary:
+      "You are losing them in instalments, and there is no time set aside to feel it. This is grief, even though nobody has died.",
+    audience: ["caregiver", "family"],
+    cue: "When you are mourning someone who is still here",
+    blocks: [
+      {
+        heading: "The losses nobody counts",
+        body: [
+          "Caregivers grieve long before a death, and often for things that never get named out loud: the conversations you used to have, being a partner rather than a nurse, the plans you had for these years, the version of them that knew who you were.",
+          "Because none of it appears in an obituary, there are no cards and no time off. This is disenfranchised grief — real loss that carries no social permission to mourn.",
+        ],
+      },
+      {
+        heading: "What it looks like in a caring day",
+        list: [
+          "Crying at their handwriting on an old shopping list, then carrying on with the medication round.",
+          "Feeling numb during a good moment, because letting yourself enjoy it costs too much afterwards.",
+          "Rehearsing the funeral while pushing the wheelchair.",
+          "Snapping at them, then grieving the person who would have laughed it off.",
+          "Wishing it were over — and then grieving that you thought it.",
+          "Withdrawing slightly, on purpose, to make the ending survivable, and feeling like a traitor for it.",
+        ],
+      },
+      {
+        heading: "Grieving in instalments is not disloyalty",
+        body: [
+          "Pulling back a little is a protective reflex, not a betrayal. So is imagining life afterwards. Neither shortens their life, and neither means you love them less.",
+          "The people who fare worst afterwards are rarely the ones who felt these things. They are the ones who felt them alone and concluded they were monstrous.",
+        ],
+      },
+      {
+        heading: "What helps while it is still happening",
+        list: [
+          "Name it as grief. It reframes the exhaustion and the irritability as mourning rather than failure.",
+          "Say the unsayable sentence to one person outside the household, or write it where nobody will read it.",
+          "Keep one thing that is still the relationship rather than the illness — a programme you watch, a hand held in silence.",
+          "Mark losses as they happen. The week they stop being able to walk to the garden deserves a private minute.",
+          "Do the legacy work now, while they can take part. It is grief work that helps both of you.",
+          "Find bereavement support before the death. Most services accept early referrals, and having the number already saves you in the first week afterwards.",
+        ],
+      },
+      {
+        heading: "In dementia, and in long illness",
+        body: [
+          "When someone is present but changed, grief has nothing to settle on. This is ambiguous loss: no ending, no ritual, and a person who is both here and gone.",
+          "The task is not resolution — it is holding both truths at once. They are still here, and much of what you had is already gone. Both belong in the same sentence.",
+        ],
+      },
+    ],
+    practices: [
+      {
+        title: "Naming the losses",
+        minutes: 10,
+        steps: [
+          "Write a list headed 'what I have already lost'. Do not edit it.",
+          "Beside each one, write whether anybody else knows about it.",
+          "Circle the one that hurts most this week.",
+          "Tell one person about that specific loss — not about the situation in general.",
+          "Keep the list. Added to over months, it is a record of what you have been carrying.",
+        ],
+      },
+    ],
+    related: [
+      { href: "/support/anticipatory-grief", label: "Anticipatory grief in full" },
+      { href: "/support/caregiver/when-caring-ends", label: "When caring ends" },
+      { href: "/care/counselling", label: "Bereavement counselling" },
+    ],
+  },
+  {
+    slug: "when-caring-ends",
+    title: "When caring ends",
+    summary:
+      "The death is one loss. The role, the routine, the purpose and the person you became are another — and almost nobody warns you about the second one.",
+    audience: ["caregiver", "family"],
+    cue: "After a death, or after a move into a home",
+    blocks: [
+      {
+        heading: "Two losses at once",
+        body: [
+          "Caregivers grieve the person and the role together. The alarm still goes off at the medication time. The phone does not ring. The skills you spent years learning are suddenly of no use to anyone.",
+          "Bereaved carers often describe the first weeks as free-falling — not only sadness, but the collapse of structure, identity and usefulness at the same time.",
+        ],
+      },
+      {
+        heading: "The feelings that arrive uninvited",
+        list: [
+          "Relief — the most common, and the most guilt-inducing. It is a response to the end of suffering and strain, not a verdict on your love.",
+          "Emptiness where the tasks used to be, and panic at unstructured days.",
+          "Anger — at services, at relatives, at yourself, at them.",
+          "Regret about the last weeks: what you said, what you did not say, whether you should have called someone sooner.",
+          "Losing the people who came with caring — the nurses, the other carers, the rhythm of the ward.",
+          "Fear of being forgotten now that you are no longer the one to phone.",
+        ],
+      },
+      {
+        heading: "If they moved into a hospice or a care home",
+        body: [
+          "Caring does not end at the door; it changes shape, and the guilt is often sharper. You remain the expert on them, and you should still be treated as part of the team.",
+          "Ask to be involved in the care plan, keep doing the personal things that are yours to do, and let the staff take the tasks that were breaking you.",
+        ],
+      },
+      {
+        heading: "Rebuilding, at the right speed",
+        steps: [
+          "Keep one fixed commitment a week for the first month — anything, as long as it is in the diary.",
+          "Avoid big irreversible decisions in the first year if you can.",
+          "Expect month three to be harder than month one, when everyone else's attention has moved on.",
+          "Take the caring skills somewhere when you want to — volunteering, peer support, training — but not as a way of avoiding the grieving.",
+          "Get your own health checked. Carers routinely arrive at their own doctor for the first time in years.",
+          "If grief has not shifted at all after a year, ask about grief-specific therapy. It works, and it differs from general counselling.",
+        ],
+      },
+    ],
+    related: [
+      { href: "/support/bereavement", label: "Loss & bereavement" },
+      { href: "/support/bereavement/complicated-grief", label: "When grief becomes complicated" },
+      { href: "/tools/screening/grief", label: "Grief intensity questionnaire" },
+    ],
+  },
+  {
+    slug: "professional-carer-grief",
+    title: "Grief in professional and hospice care",
+    summary:
+      "For paid and volunteer carers: cumulative loss, grief you are not supposed to have, and what teams can do so it does not become burnout.",
+    audience: ["caregiver"],
+    cue: "For care workers, nurses, hospice staff and volunteers",
+    blocks: [
+      {
+        heading: "Cumulative loss is an occupational reality",
+        body: [
+          "In hospice, home care and nursing homes, people you knew well die regularly. Each death may be routine on a rota and it is not routine in you. They accumulate.",
+          "Because it is 'part of the job', the grief usually goes unacknowledged — by employers, by families, and by carers themselves. Unacknowledged grief is what becomes compassion fatigue, and then becomes people leaving the profession.",
+        ],
+      },
+      {
+        heading: "Signs it is accumulating",
+        list: [
+          "Flatness at a death that would once have moved you.",
+          "Avoiding the room, the family, or the funeral.",
+          "Crying days later at something small and unrelated.",
+          "Dreading particular shifts, or patients who resemble someone you lost.",
+          "Taking the deaths home and rehearsing them at night.",
+          "Believing you have no right to grieve because you are not the family.",
+        ],
+      },
+      {
+        heading: "What actually helps at work",
+        list: [
+          "A ritual after a death: a moment at the bedside, a name in a book, a candle, a pause before the next admission.",
+          "Debriefing that is scheduled rather than optional — and separate from any clinical incident review.",
+          "Clinical supervision or reflective practice, monthly and protected.",
+          "Naming losses at handover, so grief is spoken rather than assumed.",
+          "Peer support: the colleague who was there needs no explanation.",
+          "Rotating the heaviest allocations, so the same carer is not with every dying patient.",
+          "Attending funerals where appropriate, with management support to do it.",
+        ],
+      },
+      {
+        heading: "For managers and hospice leads",
+        list: [
+          "Build memorial practice into the year — an annual service for staff as well as families.",
+          "Give new staff explicit permission to grieve, and tell them on day one what support exists.",
+          "Read sickness absence and turnover as grief indicators, not only as staffing problems.",
+          "Fund supervision properly. It costs less than replacing an experienced carer.",
+          "Provide a route to counselling that does not run through the person's line manager.",
+        ],
+      },
+      {
+        heading: "Where your grief differs from the family's",
+        body: [
+          "You knew them for weeks rather than decades, and you saw a version of them the family never did. That does not make it less of a loss — it makes it a different one, with fewer people who understand it.",
+          "You are also holding the family's grief in the room. Putting your own down for a while is a professional skill, not coldness. It does have to be picked up again somewhere, with someone.",
+        ],
+      },
+    ],
+    related: [
+      { href: "/support/caregiver/compassion-fatigue", label: "Compassion fatigue" },
+      { href: "/support/caregiver/burnout", label: "Burnout" },
+      { href: "/care/community", label: "Talk to other carers" },
+    ],
+  },
 ];
 
 /* ===========================================================================

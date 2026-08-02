@@ -127,6 +127,19 @@ export default async function NutritionConditionPage({
       </Callout>
 
       <section className="flex flex-wrap gap-2">
+        {condition.slug === "diabetes" && (
+          <Link href="/tools/glucose" className="btn btn-soft text-sm">
+            Blood sugar monitor
+          </Link>
+        )}
+        {(condition.slug === "hypertension" ||
+          condition.slug === "heart-disease" ||
+          condition.slug === "kidney-disease" ||
+          condition.slug === "stroke-recovery") && (
+          <Link href="/tools/blood-pressure" className="btn btn-soft text-sm">
+            Blood pressure monitor
+          </Link>
+        )}
         <Link href="/care/dietitian" className="btn btn-soft text-sm">
           Book a dietitian
         </Link>

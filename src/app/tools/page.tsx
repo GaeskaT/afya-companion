@@ -45,11 +45,35 @@ export default function ToolsHubPage() {
           description="Goals with a bad-day version built in, so a difficult week pauses them rather than ending them."
         />
         <LinkCard
+          href="/tools/milestones"
+          title="My milestones"
+          description="Markers worth moving towards — and a record of the ground you have already covered."
+        />
+        <LinkCard
           href="/tools/dashboard"
           title="Progress dashboard"
           description="Mood, pain, sleep, weight, BMI, fluid, eating pattern and questionnaire scores over time."
         />
       </Grid>
+
+      <section>
+        <SectionTitle
+          title="Condition monitoring"
+          hint="Charts you can hand to your clinician"
+        />
+        <Grid cols={2}>
+          <LinkCard
+            href="/tools/glucose"
+            title="Blood sugar monitor"
+            description="Log readings in mmol/L or mg/dL, chart the pattern, see time in range, and get hypo guidance when it matters."
+          />
+          <LinkCard
+            href="/tools/blood-pressure"
+            title="Blood pressure monitor"
+            description="Systolic, diastolic and pulse over time, with the 7-day home average your clinician will ask for."
+          />
+        </Grid>
+      </section>
 
       <section>
         <SectionTitle

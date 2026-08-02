@@ -15,6 +15,11 @@ export const KEYS = {
   assistant: "assistant-thread",
   bookings: "bookings",
   applications: "applications",
+  glucose: "glucose",
+  glucoseTargets: "glucose-targets",
+  glucoseUnit: "glucose-unit",
+  bloodPressure: "blood-pressure",
+  milestones: "milestones",
 } as const;
 
 /** Draft registrations are kept per role, so a half-finished one survives a reload. */
@@ -112,6 +117,56 @@ export type AssistantMessage = {
   text: string;
   at: string;
   engine?: string;
+};
+
+export type GlucoseReading = {
+  id: string;
+  /** Always stored in mmol/L; the display unit is a separate preference. */
+  mmol: number;
+  context: import("./vitals").GlucoseContext;
+  at: string;
+  date: string;
+  note?: string;
+};
+
+export type BPReading = {
+  id: string;
+  systolic: number;
+  diastolic: number;
+  pulse?: number;
+  context: import("./vitals").BPContext;
+  arm?: "left" | "right";
+  at: string;
+  date: string;
+  note?: string;
+};
+
+export type Milestone = {
+  id: string;
+  title: string;
+  category: MilestoneCategory;
+  targetDate?: string;
+  why?: string;
+  howToMark?: string;
+  status: "planned" | "achieved" | "paused";
+  achievedDate?: string;
+  reflection?: string;
+  createdAt: string;
+};
+
+export type MilestoneCategory =
+  | "treatment"
+  | "physical"
+  | "personal"
+  | "family"
+  | "wellbeing";
+
+export const MILESTONE_CATEGORY_LABEL: Record<MilestoneCategory, string> = {
+  treatment: "Treatment",
+  physical: "Body & strength",
+  personal: "Personal",
+  family: "People",
+  wellbeing: "Wellbeing",
 };
 
 export const MOOD_LABELS = ["Very low", "Low", "Okay", "Good", "Very good"];

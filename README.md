@@ -23,7 +23,7 @@ device-local anyway, behaves exactly as in a full deployment.
 **Emotional support** — `/support`
 
 - Patient (11 topics): check-ins, anxiety, depression, pain journal, relaxation, hope, self-esteem, sleep, spiritual care, affirmations, goals
-- Caregiver (9): strain, burnout, compassion fatigue, self-care, emotions, time, emergencies, asking for help, balance
+- Caregiver (12): strain, burnout, compassion fatigue, self-care, emotions, time, emergencies, asking for help, balance — plus three on grief: grieving while still caring (disenfranchised and ambiguous loss), when caring ends (the second loss nobody warns about), and cumulative loss in professional and hospice care, including what teams and managers can do about it
 - Family (7): the diagnosis, communicating, children, conflict, money, family meetings, support systems
 - 12 psychological modules: psychoeducation → stress → anxiety → depression → acceptance → coping → emotional regulation → cognitive restructuring → resilience → problem-solving → hope therapy → meaning-making
 - Anticipatory grief (12 topics) and bereavement (11 topics)
@@ -57,11 +57,19 @@ Files are capped at 5 MB and limited to PDF or images.
 - Nutrition assessment → BMI, energy and protein estimates, matched plans, a 7-day menu and a shopping list
 - Food, fluid and weight trackers; an AI nutrition assistant
 
+**Condition monitoring** — `/tools/glucose`, `/tools/blood-pressure`
+
+- **Blood sugar**: readings in mmol/L or mg/dL with context (fasting, pre-meal, 2 h post-meal, bedtime, hypo symptoms, exercise), charted with the target band and hypo threshold, time-in-range, editable targets, and an estimated GMI only once there are 20+ readings across 14+ days. Hypo and very-high readings return treatment guidance — the 15-and-15 rule, ketones, when to call — rather than a colour.
+- **Blood pressure**: systolic, diastolic and pulse, charted together, classified against *home* thresholds (a home average under 135/85, not clinic values), with morning/evening split, the 7-day average clinicians actually ask for, measurement technique, and same-day escalation at 180/120 or with stroke and cardiac symptoms.
+- Both are logs. Neither ever suggests a dose change, and both say so.
+
 **Tools** — `/tools`
 
 Daily check-in, journal (pain diary + thought records + free writing), gratitude,
-breathing (5 patterns) and guided relaxation (5 scripts), goals, progress
-dashboard, and eight screening questionnaires:
+breathing (5 patterns) and guided relaxation (5 scripts), goals, **milestones**
+(markers to move towards, with a reached-timeline and a pause rather than a
+fail when illness moves the date), progress dashboard, and eight screening
+questionnaires:
 
 | Tool | Instrument |
 | --- | --- |

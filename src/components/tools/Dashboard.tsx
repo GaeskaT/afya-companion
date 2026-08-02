@@ -3,16 +3,28 @@
 import Link from "next/link";
 import { EmptyState, Stat } from "@/components/ui";
 import { lastNDays, useLocalState } from "@/lib/storage";
+import { useNow } from "@/lib/now";
 import {
   KEYS,
   MOOD_LABELS,
+  type BPReading,
   type CheckIn,
   type FluidEntry,
   type FoodEntry,
+  type GlucoseReading,
+  type Milestone,
   type ScreeningResult,
   type WeightEntry,
 } from "@/lib/records";
 import { bmi, bmiBand, type NutritionProfile } from "@/lib/nutrition";
+import {
+  bpStats,
+  formatGlucose,
+  glucoseStats,
+  DEFAULT_GLUCOSE_TARGETS,
+  type GlucoseTargets,
+  type GlucoseUnit,
+} from "@/lib/vitals";
 
 export function Dashboard() {
   const [checkIns] = useLocalState<CheckIn[]>(KEYS.checkIns, []);
@@ -21,6 +33,20 @@ export function Dashboard() {
   const [food] = useLocalState<FoodEntry[]>(KEYS.foodDiary, []);
   const [results] = useLocalState<ScreeningResult[]>(KEYS.screening, []);
   const [profile] = useLocalState<NutritionProfile | null>(KEYS.nutritionProfile, null);
+  const [glucose] = useLocalState<GlucoseReading[]>(KEYS.glucose, []);
+  const [unit] = useLocalState<GlucoseUnit>(KEYS.glucoseUnit, "mmol/L");
+  const [targets] = useLocalState<GlucoseTargets>(KEYS.glucoseTargets, DEFAULT_GLUCOSE_TARGETS);
+  const [bp] = useLocalState<BPReading[]>(KEYS.bloodPressure, []);
+  const [milestones] = useLocalState<Milestone[]>(KEYS.milestones, []);
+
+  const now = useNow();
+  const fortnightAgo = now - 14 * 86400000;
+  const recentGlucose = glucose.filter((g) => new Date(g.at).getTime() >= fortnightAgo);
+  const gStats = glucoseStats(recentGlucose, targets, 14);
+  const weekAgo = now - 7 * 86400000;
+  const bpWeek = bp.filter((r) => new Date(r.at).getTime() >= weekAgo);
+  const bStats = bpStats(bpWeek);
+  const milestonesReached = milestones.filter((m) => m.status === "achieved").length;
 
   const days = lastNDays(30);
   const monthCheckIns = days.map((date) => checkIns.find((c) => c.date === date));
@@ -30,7 +56,10 @@ export function Dashboard() {
     checkIns.length === 0 &&
     weights.length === 0 &&
     fluid.length === 0 &&
-    results.length === 0
+    results.length === 0 &&
+    glucose.length === 0 &&
+    bp.length === 0 &&
+    milestones.length === 0
   ) {
     return (
       <EmptyState
@@ -163,6 +192,62 @@ export function Dashboard() {
               ))}
             </ul>
           </div>
+        </section>
+      )}
+
+      {(recentGlucose.length > 0 || bpWeek.length > 0 || milestones.length > 0) && (
+        <section>
+          <h2 className="mb-3 text-lg">Condition monitoring</h2>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {recentGlucose.length > 0 && (
+              <>
+                <Stat
+                  label="Average glucose (14 days)"
+                  value={
+                    gStats.meanMmol ? formatGlucose(gStats.meanMmol, unit).split(" ")[0] : "—"
+                  }
+                  unit={unit}
+                  hint={`${gStats.count} readings`}
+                />
+                <Stat
+                  label="Time in range"
+                  value={`${gStats.inRange}%`}
+                  hint={gStats.hypoCount ? `${gStats.hypoCount} low` : "no lows"}
+                />
+              </>
+            )}
+            {bpWeek.length > 0 && (
+              <Stat
+                label="Blood pressure (7-day)"
+                value={`${bStats.avgSystolic}/${bStats.avgDiastolic}`}
+                unit="mmHg"
+                hint={bStats.band?.label}
+              />
+            )}
+            {milestones.length > 0 && (
+              <Stat
+                label="Milestones reached"
+                value={milestonesReached}
+                hint={`${milestones.length - milestonesReached} ahead of you`}
+              />
+            )}
+          </div>
+          <p className="mt-2 text-xs text-muted">
+            <Link href="/tools/glucose" className="font-medium text-primary hover:underline">
+              Blood sugar
+            </Link>{" "}
+            ·{" "}
+            <Link
+              href="/tools/blood-pressure"
+              className="font-medium text-primary hover:underline"
+            >
+              Blood pressure
+            </Link>{" "}
+            ·{" "}
+            <Link href="/tools/milestones" className="font-medium text-primary hover:underline">
+              Milestones
+            </Link>
+          </p>
         </section>
       )}
 

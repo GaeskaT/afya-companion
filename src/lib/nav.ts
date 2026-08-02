@@ -59,8 +59,17 @@ export const SITE_MAP: NavGroup[] = [
       { href: "/tools/gratitude", label: "Gratitude & reflection" },
       { href: "/tools/breathing", label: "Breathing & relaxation" },
       { href: "/tools/goals", label: "Goals" },
+      { href: "/tools/milestones", label: "My milestones" },
       { href: "/tools/screening", label: "Screening questionnaires" },
       { href: "/tools/dashboard", label: "Progress dashboard" },
+    ],
+  },
+  {
+    title: "Monitoring",
+    links: [
+      { href: "/tools/glucose", label: "Blood sugar monitor" },
+      { href: "/tools/blood-pressure", label: "Blood pressure monitor" },
+      { href: "/nutrition/tracker", label: "Food & fluid tracker" },
     ],
   },
   {

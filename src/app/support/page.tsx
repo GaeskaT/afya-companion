@@ -56,8 +56,11 @@ export default function SupportHubPage() {
       </section>
 
       <section>
-        <SectionTitle title="Grief" hint="Before a death, and after one" />
-        <Grid cols={2}>
+        <SectionTitle
+          title="Grief"
+          hint="Before a death, after one, and for the people paid to be there"
+        />
+        <Grid cols={3}>
           <LinkCard
             href="/support/anticipatory-grief"
             title="Anticipatory grief"
@@ -67,6 +70,12 @@ export default function SupportHubPage() {
             href="/support/bereavement"
             title="Loss & bereavement"
             description="Understanding grief, myths, anniversaries, children's grief, men's grief, complicated grief and purpose after loss."
+          />
+          <LinkCard
+            href="/support/caregiver/caregiver-grief"
+            meta="Caregivers"
+            title="Grief while caring"
+            description="Losing them in instalments, what happens when caring ends, and cumulative loss in hospice and professional care."
           />
         </Grid>
       </section>

@@ -80,6 +80,18 @@ export default async function ConditionPage({
             Nutrition for {condition.name.toLowerCase()}
           </Link>
         )}
+        {condition.slug === "diabetes" && (
+          <Link href="/tools/glucose" className="btn btn-soft text-sm">
+            Blood sugar monitor
+          </Link>
+        )}
+        {(condition.slug === "heart-disease" ||
+          condition.slug === "stroke" ||
+          condition.slug === "kidney-disease") && (
+          <Link href="/tools/blood-pressure" className="btn btn-soft text-sm">
+            Blood pressure monitor
+          </Link>
+        )}
         <Link href="/care/counselling" className="btn btn-soft text-sm">
           Counselling
         </Link>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useSyncExternalStore } from "react";
+import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { todayKey } from "./dates";
 
 /**
@@ -62,12 +62,15 @@ function subscribe(onChange: () => void) {
 }
 
 /**
- * Two module-level caches keep the values returned by the hook referentially
- * stable: `defaults` remembers the first `initial` seen for a key (callers
- * pass fresh array literals every render), and `parsed` memoises JSON by its
- * raw text. Without them every render would hand back a new object.
+ * Parsed JSON is memoised by its raw text so repeated renders hand back the
+ * same object rather than a fresh one each time.
+ *
+ * The fallback is deliberately *not* cached per key: two components can watch
+ * the same key with different defaults — the nutrition assessment wants a
+ * blank profile, the dashboard wants null so it can tell "not filled in yet"
+ * apart from "filled in with zeroes". A shared per-key default gave whichever
+ * component rendered first the right answer and the other one a crash.
  */
-const defaults = new Map<string, unknown>();
 const parsed = new Map<string, unknown>();
 
 function parseCached<T>(raw: string, fallback: T): T {
@@ -83,8 +86,9 @@ function parseCached<T>(raw: string, fallback: T): T {
 }
 
 export function useLocalState<T>(key: string, initial: T) {
-  if (!defaults.has(key)) defaults.set(key, initial);
-  const fallback = defaults.get(key) as T;
+  // Captured once per component instance, which keeps it referentially stable
+  // even though callers pass a fresh literal on every render.
+  const [fallback] = useState(initial);
 
   const raw = useSyncExternalStore(
     subscribe,
