@@ -374,7 +374,7 @@ export function JoinForm({ role }: { role: RoleDef }) {
             <Callout tone="good" title="Everything required is here">
               {role.verified
                 ? `We aim to complete verification in ${role.reviewDays.toLowerCase()}.`
-                : "You can start using CareCircle straight away."}
+                : "You can start using Afya Companion straight away."}
             </Callout>
           )}
 
@@ -428,7 +428,7 @@ export function JoinForm({ role }: { role: RoleDef }) {
           ) : (
             <Callout tone="info" title="Where this goes">
               Unlike the rest of the app, this form leaves your device. Your
-              answers and documents go to the CareCircle verification team, who
+              answers and documents go to the Afya Companion verification team, who
               check them with the issuing bodies. They are kept for as long as
               your registration is active.
             </Callout>

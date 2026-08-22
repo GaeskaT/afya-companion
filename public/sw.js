@@ -1,4 +1,4 @@
-/* CareCircle offline shell -------------------------------------------------
+/* Afya Companion offline shell -------------------------------------------------
    People open this app in waiting rooms, wards and rural clinics where the
    signal drops. Strategy:
      - navigations: network first, fall back to cache, then to /offline

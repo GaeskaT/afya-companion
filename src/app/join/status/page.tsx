@@ -5,7 +5,7 @@ import { Page, PageHeader } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "Application status",
-  description: "Your CareCircle registration reference, progress and anything outstanding.",
+  description: "Your Afya Companion registration reference, progress and anything outstanding.",
 };
 
 export default function StatusPage() {

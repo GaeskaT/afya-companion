@@ -18,7 +18,7 @@ export default function CommunityPage() {
       />
 
       <Callout tone="warn" title="Before you post">
-        Posts are visible to other people using CareCircle. Do not include full
+        Posts are visible to other people using Afya Companion. Do not include full
         names, hospital numbers or anything that identifies your care team. If
         you are in crisis, this is not the fastest route to help — use the
         crisis page.

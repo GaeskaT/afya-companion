@@ -25,7 +25,7 @@ export function SettingsPanel() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `carecircle-export-${new Date().toISOString().slice(0, 10)}.json`;
+    link.download = `afya-companion-export-${new Date().toISOString().slice(0, 10)}.json`;
     link.click();
     URL.revokeObjectURL(url);
     setNote("Exported. Keep the file somewhere private — it contains everything you have written.");
@@ -153,7 +153,7 @@ export function SettingsPanel() {
           </li>
         </ul>
         <p className="text-sm text-muted">
-          Installed, CareCircle opens full screen and the crisis page, breathing
+          Installed, Afya Companion opens full screen and the crisis page, breathing
           exercises and home screen keep working without a signal.
         </p>
       </section>

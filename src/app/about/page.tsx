@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "What CareCircle is, what it is not, where the content comes from, and how your data is handled.",
+    "What Afya Companion is, what it is not, where the content comes from, and how your data is handled.",
 };
 
 export default function AboutPage() {
@@ -28,7 +28,7 @@ export default function AboutPage() {
           nobody is looking.
         </p>
         <p className="text-[0.98rem] leading-relaxed text-ink-soft">
-          CareCircle addresses three people at once: the patient, the caregiver,
+          Afya Companion addresses three people at once: the patient, the caregiver,
           and the family around them. It combines psychological support, grief
           and bereavement care, screening tools, nutrition and dietetics, and
           routes into professional and peer help.
@@ -87,7 +87,7 @@ export default function AboutPage() {
       <section>
         <SectionTitle title="Using it offline" />
         <p className="text-[0.98rem] leading-relaxed text-ink-soft">
-          CareCircle installs to a phone home screen and keeps working without a
+          Afya Companion installs to a phone home screen and keeps working without a
           signal — deliberately, because hospital basements, rural clinics and
           long ward nights are exactly when people need the crisis page and the
           breathing exercises.

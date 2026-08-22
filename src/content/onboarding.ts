@@ -75,7 +75,7 @@ const INDEMNITY: DocRequirement = {
   label: "Professional indemnity insurance",
   category: "insurance",
   description:
-    "Current certificate showing cover, insurer and policy number. Cover must be active for the whole period you practise through CareCircle.",
+    "Current certificate showing cover, insurer and policy number. Cover must be active for the whole period you practise through Afya Companion.",
   required: true,
   needsIssuer: true,
   needsNumber: true,
@@ -92,7 +92,7 @@ const PROFESSIONAL_CONSENTS: Consent[] = [
   {
     key: "verification",
     label:
-      "I authorise CareCircle to verify my qualifications, registration and clearances directly with the issuing institutions and regulators.",
+      "I authorise Afya Companion to verify my qualifications, registration and clearances directly with the issuing institutions and regulators.",
     required: true,
   },
   {
@@ -110,7 +110,7 @@ const PROFESSIONAL_CONSENTS: Consent[] = [
   {
     key: "notify",
     label:
-      "I will tell CareCircle within 7 days if my registration, insurance or clearance lapses, is suspended, or is subject to investigation.",
+      "I will tell Afya Companion within 7 days if my registration, insurance or clearance lapses, is suspended, or is subject to investigation.",
     required: true,
   },
   {
@@ -130,7 +130,7 @@ const PERSONAL_CONSENTS: Consent[] = [
   {
     key: "not-emergency",
     label:
-      "I understand CareCircle is not an emergency service, and that in a crisis I should call my local emergency number.",
+      "I understand Afya Companion is not an emergency service, and that in a crisis I should call my local emergency number.",
     required: true,
   },
   {
@@ -142,7 +142,7 @@ const PERSONAL_CONSENTS: Consent[] = [
   {
     key: "contact",
     label:
-      "CareCircle may contact me about my registration and any support I request.",
+      "Afya Companion may contact me about my registration and any support I request.",
     required: true,
   },
   {
@@ -1070,7 +1070,7 @@ export const VERIFICATION_STEPS = [
 ];
 
 export const WHY_DOCUMENTS = [
-  "The people using CareCircle are seriously ill, frightened, and often unable to check anyone's credentials themselves.",
+  "The people using Afya Companion are seriously ill, frightened, and often unable to check anyone's credentials themselves.",
   "Families let caregivers into their homes and leave them alone with someone vulnerable.",
   "A counsellor working outside their competence with a dying patient can do real harm.",
   "Nutrition advice given to someone on dialysis, or in liver failure, can be dangerous if it comes from the wrong hands.",

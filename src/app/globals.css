@@ -1,31 +1,31 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   CareCircle — design tokens
-   Teal-blue: clinical calm without coldness. Light + dark, mobile-first.
+   Afya Companion — design tokens
+   Turquoise, navy & gold: warm clinical calm. Light + dark, mobile-first.
 --------------------------------------------------------------------------- */
 
 :root {
-  --bg: #f2f8f9;
-  --bg-deep: #e6f1f3;
+  --bg: #f0f8f9;
+  --bg-deep: #e3f1f3;
   --surface: #ffffff;
-  --surface-2: #f0f7f8;
-  --surface-3: #e2eff1;
+  --surface-2: #edf7f8;
+  --surface-3: #dceef1;
 
-  --ink: #0b2b33;
-  --ink-soft: #33555e;
-  --muted: #5e7c85;
+  --ink: #0b1f3d;
+  --ink-soft: #33456b;
+  --muted: #64748b;
 
-  --primary: #0d7f94;
-  --primary-600: #0a6b7d;
-  --primary-700: #085564;
-  --primary-tint: #dcf0f4;
-  --primary-tint-2: #c3e5eb;
+  --primary: #0d9aa4;
+  --primary-600: #0a808a;
+  --primary-700: #086771;
+  --primary-tint: #d6f2f4;
+  --primary-tint-2: #b2e6ea;
 
-  --accent: #e07a5f;
-  --accent-tint: #fbe8e2;
+  --accent: #cf9f22;
+  --accent-tint: #f8edcf;
 
-  --calm: #4aa3a8;
+  --calm: #3faeb0;
   --warn: #b4690e;
   --warn-tint: #fdf1de;
   --danger: #c0392b;
@@ -33,37 +33,37 @@
   --good: #2e7d5b;
   --good-tint: #e2f3ec;
 
-  --line: #d5e6e9;
-  --line-strong: #b9d5da;
+  --line: #d2e6e9;
+  --line-strong: #b5d7db;
 
-  --shadow-soft: 0 1px 2px rgba(11, 43, 51, 0.05),
-    0 10px 26px -16px rgba(11, 43, 51, 0.35);
-  --shadow-lift: 0 2px 6px rgba(11, 43, 51, 0.06),
-    0 26px 50px -24px rgba(11, 43, 51, 0.4);
+  --shadow-soft: 0 1px 2px rgba(11, 31, 61, 0.05),
+    0 10px 26px -16px rgba(11, 31, 61, 0.35);
+  --shadow-lift: 0 2px 6px rgba(11, 31, 61, 0.06),
+    0 26px 50px -24px rgba(11, 31, 61, 0.4);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #06181d;
-    --bg-deep: #041216;
-    --surface: #0d2830;
-    --surface-2: #113039;
-    --surface-3: #17404b;
+    --bg: #071528;
+    --bg-deep: #04101f;
+    --surface: #0e2038;
+    --surface-2: #142a46;
+    --surface-3: #1b3354;
 
-    --ink: #e7f4f6;
-    --ink-soft: #b9d5da;
-    --muted: #8fb0b8;
+    --ink: #e8eef8;
+    --ink-soft: #b7c6de;
+    --muted: #8598b6;
 
-    --primary: #3fb5c9;
-    --primary-600: #57c4d6;
-    --primary-700: #7ad4e3;
-    --primary-tint: #10333d;
-    --primary-tint-2: #16414e;
+    --primary: #35c3cd;
+    --primary-600: #54d0d9;
+    --primary-700: #79dce3;
+    --primary-tint: #0c2e34;
+    --primary-tint-2: #103a44;
 
-    --accent: #f0937a;
-    --accent-tint: #3a231d;
+    --accent: #ecc659;
+    --accent-tint: #3a2f12;
 
-    --calm: #5fc0c5;
+    --calm: #52c2c6;
     --warn: #e0a355;
     --warn-tint: #3a2c15;
     --danger: #f0857a;
@@ -71,8 +71,8 @@
     --good: #63c99c;
     --good-tint: #12332a;
 
-    --line: #1c414c;
-    --line-strong: #2a5b69;
+    --line: #22344f;
+    --line-strong: #324a6c;
 
     --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.3),
       0 10px 26px -16px rgba(0, 0, 0, 0.7);
@@ -205,7 +205,7 @@
   }
   @media (prefers-color-scheme: dark) {
     .btn-primary {
-      color: #04181d;
+      color: #04101f;
     }
   }
   .btn-primary:hover {

@@ -1,4 +1,4 @@
-/** Shapes of everything CareCircle stores on the device, plus their keys. */
+/** Shapes of everything Afya Companion stores on the device, plus their keys. */
 
 export const KEYS = {
   profile: "profile",

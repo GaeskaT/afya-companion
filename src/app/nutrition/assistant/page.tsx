@@ -5,7 +5,7 @@ import { Disclaimer, Page, PageHeader } from "@/components/ui";
 export const metadata: Metadata = {
   title: "Nutrition assistant",
   description:
-    "Ask nutrition questions and get practical answers drawn from CareCircle's own dietetic guidance.",
+    "Ask nutrition questions and get practical answers drawn from Afya Companion's own dietetic guidance.",
 };
 
 export default function AssistantPage() {

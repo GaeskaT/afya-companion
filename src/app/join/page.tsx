@@ -5,7 +5,7 @@ import { DOC_CATEGORY_LABEL } from "@/lib/onboarding";
 import { Bullets, Callout, Card, Disclaimer, Page, PageHeader, SectionTitle, Tag } from "@/components/ui";
 
 export const metadata: Metadata = {
-  title: "Join CareCircle",
+  title: "Join Afya Companion",
   description:
     "Register as a patient, family member, counsellor, dietitian, or caregiver — individual or institution. Professionals are verified against their academic and statutory documents.",
 };
@@ -15,7 +15,7 @@ export default function JoinPage() {
     <Page>
       <PageHeader
         eyebrow="Onboarding"
-        title="Join CareCircle"
+        title="Join Afya Companion"
         intro="Five ways in. Patients and families are in straight away. Anyone who will work with a seriously ill person — counsellor, dietitian, caregiver or care institution — is verified first."
       />
 
@@ -109,7 +109,7 @@ export default function JoinPage() {
       </section>
 
       <Callout tone="warn" title="What we are not">
-        CareCircle is not a regulator and does not licence anyone. We check that
+        Afya Companion is not a regulator and does not licence anyone. We check that
         your registration is real, current and unrestricted with the body that
         issued it. Your own council remains responsible for your licence and your
         conduct.

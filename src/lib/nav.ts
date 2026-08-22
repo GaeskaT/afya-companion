@@ -83,7 +83,7 @@ export const SITE_MAP: NavGroup[] = [
     ],
   },
   {
-    title: "Join CareCircle",
+    title: "Join Afya Companion",
     links: [
       { href: "/join", label: "Register" },
       { href: "/join/status", label: "Application status" },
@@ -92,7 +92,7 @@ export const SITE_MAP: NavGroup[] = [
   {
     title: "About",
     links: [
-      { href: "/about", label: "About CareCircle" },
+      { href: "/about", label: "About Afya Companion" },
       { href: "/settings", label: "Settings & privacy" },
     ],
   },

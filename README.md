@@ -1,4 +1,4 @@
-# CareCircle
+# Afya Companion
 
 > Supporting the emotional and nutritional wellbeing of patients, caregivers and families — through every stage of illness.
 
@@ -174,7 +174,7 @@ offline-capable.
 
 ## Not a medical device
 
-CareCircle provides education and self-help support. It does not diagnose or
+Afya Companion provides education and self-help support. It does not diagnose or
 treat, and it does not replace a clinician. Screening questionnaires are
 screening aids. Every page carries the disclaimer, and crisis routes are one tap
 from every screen.

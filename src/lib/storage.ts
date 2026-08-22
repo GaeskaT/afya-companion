@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState, useSyncExternalStore } from "react";
 import { todayKey } from "./dates";
 
 /**
- * CareCircle keeps personal data on the device by default.
+ * Afya Companion keeps personal data on the device by default.
  *
  * Mood, journals, screening scores and food diaries are among the most
  * sensitive things a person can write down, so nothing here is sent to a

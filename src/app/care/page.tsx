@@ -45,7 +45,7 @@ export default function CareHubPage() {
         />
         <LinkCard
           href="/join"
-          title="Join CareCircle"
+          title="Join Afya Companion"
           description="Register as a patient, family member, counsellor, dietitian or caregiver — including hospices and care institutions."
         />
       </Grid>

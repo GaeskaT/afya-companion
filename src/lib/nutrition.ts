@@ -118,7 +118,7 @@ export function estimateEnergy(profile: NutritionProfile): {
     return {
       kcal: null,
       range: null,
-      note: "Energy and protein targets in kidney and liver disease are set individually from your blood results. CareCircle will not estimate them — ask your renal or hepatology dietitian.",
+      note: "Energy and protein targets in kidney and liver disease are set individually from your blood results. Afya Companion will not estimate them — ask your renal or hepatology dietitian.",
     };
   }
 

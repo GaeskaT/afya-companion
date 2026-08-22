@@ -14,7 +14,7 @@ export default function SettingsPage() {
       <PageHeader
         eyebrow="Settings"
         title="Settings & privacy"
-        intro="Everything personal in CareCircle lives on this device. Here is exactly what that means, and how to take it with you or wipe it."
+        intro="Everything personal in Afya Companion lives on this device. Here is exactly what that means, and how to take it with you or wipe it."
       />
       <SettingsPanel />
     </Page>
