@@ -5,7 +5,7 @@
 A mobile + web app (installable PWA) that addresses three people at once: the
 person who is ill, the person caring for them, and the family around them.
 
-**Live demo:** https://gaeskat.github.io/carecircle/
+**Live demo:** https://gaeskat.github.io/afya-companion/
 
 ```bash
 npm install
@@ -130,7 +130,7 @@ for what production storage has to add.
 | Command | Result |
 | --- | --- |
 | `npm run build` | Full server build. API routes work: booking, moderation queue, model-backed assistant. |
-| `NEXT_PUBLIC_DEMO=1 NEXT_PUBLIC_BASE_PATH=/carecircle npm run build` | Static export to `out/` for GitHub Pages. CI drops `src/app/api` first; forms and assistant degrade as described above. |
+| `NEXT_PUBLIC_DEMO=1 NEXT_PUBLIC_BASE_PATH=/afya-companion npm run build` | Static export to `out/` for GitHub Pages. CI drops `src/app/api` first; forms and assistant degrade as described above. |
 
 `.github/workflows/pages.yml` runs the second on every push to `main`.
 

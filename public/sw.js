@@ -11,7 +11,7 @@ const SHELL = `${VERSION}-shell`;
 const RUNTIME = `${VERSION}-runtime`;
 
 /* Everything is scope-relative so the same worker serves both a root
-   deployment and a subpath one (GitHub Pages at /carecircle/). */
+   deployment and a subpath one (GitHub Pages at /afya-companion/). */
 const BASE = new URL(self.registration.scope).pathname.replace(/\/$/, "");
 const OFFLINE = `${BASE}/offline`;
 

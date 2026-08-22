@@ -4,7 +4,7 @@
  */
 export const IS_DEMO = process.env.NEXT_PUBLIC_DEMO === "1";
 
-/** "" for a normal deployment, "/carecircle" when served from a Pages subpath. */
+/** "" for a normal deployment, "/afya-companion" when served from a Pages subpath. */
 export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export const DEMO_NOTE =

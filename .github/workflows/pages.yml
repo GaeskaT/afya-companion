@@ -36,7 +36,7 @@ jobs:
       - run: npm run build
         env:
           NEXT_PUBLIC_DEMO: "1"
-          NEXT_PUBLIC_BASE_PATH: /carecircle
+          NEXT_PUBLIC_BASE_PATH: /afya-companion
 
       # Pages serves the artifact as-is and would otherwise run it through
       # Jekyll, which strips paths beginning with an underscore (_next).
