@@ -38,9 +38,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             alt=""
             width={40}
             height={40}
-            className="h-10 w-10 rounded-full ring-1 ring-accent/50"
+            className="h-10 w-10 shrink-0 rounded-full ring-1 ring-accent/50"
           />
-          <span className="font-display text-xl font-semibold">{site.name}</span>
+          <span className="flex flex-col">
+            <span className="font-display text-xl font-semibold leading-tight">
+              {site.name}
+            </span>
+            <span className="text-[0.75rem] font-medium leading-snug text-primary-700">
+              {site.tagline}
+            </span>
+          </span>
         </Link>
         <nav className="px-3 pb-8 space-y-6">
           {SITE_MAP.map((group) => (
@@ -85,24 +92,29 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="flex-1 flex flex-col min-w-0">
         {/* Mobile top bar */}
         <header className="lg:hidden sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80">
-          <div className="flex items-center justify-between px-4 h-14">
-            <Link href="/" className="flex items-center gap-2">
+          <div className="flex min-h-14 items-center justify-between gap-3 px-4 py-2">
+            <Link href="/" className="flex min-w-0 items-center gap-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`${BASE_PATH}/logo-mark.png`}
                 alt=""
-                width={32}
-                height={32}
-                className="h-8 w-8 rounded-full ring-1 ring-accent/50"
+                width={34}
+                height={34}
+                className="h-[34px] w-[34px] shrink-0 rounded-full ring-1 ring-accent/50"
               />
-              <span className="font-display text-lg font-semibold">
-                {site.name}
+              <span className="flex min-w-0 flex-col">
+                <span className="font-display text-base font-semibold leading-none">
+                  {site.name}
+                </span>
+                <span className="text-[0.64rem] font-medium leading-tight text-primary-700">
+                  {site.tagline}
+                </span>
               </span>
             </Link>
-            <div className="flex items-center gap-2">
+            <div className="flex shrink-0 items-center gap-2">
               <Link
                 href="/care/crisis"
-                className="rounded-full bg-danger-tint px-3 py-1.5 text-xs font-semibold text-danger"
+                className="whitespace-nowrap rounded-full bg-danger-tint px-3 py-1.5 text-xs font-semibold text-danger"
               >
                 Help now
               </Link>
