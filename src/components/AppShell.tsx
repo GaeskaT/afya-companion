@@ -8,12 +8,12 @@ import {
   IconHeart,
   IconHome,
   IconLeaf,
-  IconLogo,
   IconPulse,
   IconShield,
   IconUsers,
 } from "@/components/icons";
 import { site } from "@/lib/site";
+import { BASE_PATH } from "@/lib/env";
 
 const ICONS = {
   home: IconHome,
@@ -32,9 +32,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* Desktop sidebar */}
       <aside className="hidden lg:flex lg:w-72 xl:w-80 shrink-0 flex-col border-r border-line bg-surface sticky top-0 h-dvh overflow-y-auto">
         <Link href="/" className="flex items-center gap-2.5 px-6 py-6">
-          <span className="text-primary">
-            <IconLogo width={28} height={28} />
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`${BASE_PATH}/logo-mark.png`}
+            alt=""
+            width={40}
+            height={40}
+            className="h-10 w-10 rounded-full ring-1 ring-accent/50"
+          />
           <span className="font-display text-xl font-semibold">{site.name}</span>
         </Link>
         <nav className="px-3 pb-8 space-y-6">
@@ -82,9 +87,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <header className="lg:hidden sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80">
           <div className="flex items-center justify-between px-4 h-14">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-primary">
-                <IconLogo width={24} height={24} />
-              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${BASE_PATH}/logo-mark.png`}
+                alt=""
+                width={32}
+                height={32}
+                className="h-8 w-8 rounded-full ring-1 ring-accent/50"
+              />
               <span className="font-display text-lg font-semibold">
                 {site.name}
               </span>
