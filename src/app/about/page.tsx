@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Bullets, Card, Disclaimer, Page, PageHeader, SectionTitle } from "@/components/ui";
 import { site } from "@/lib/site";
+import { BASE_PATH } from "@/lib/env";
 
 export const metadata: Metadata = {
   title: "About",
@@ -12,10 +13,20 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <Page>
+      <div className="flex justify-center pb-2">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={`${BASE_PATH}/logo.png`}
+          alt={`${site.name} logo`}
+          width={176}
+          height={176}
+          className="h-44 w-44 rounded-full shadow-soft"
+        />
+      </div>
       <PageHeader
         eyebrow="About"
         title={site.name}
-        intro="Supporting the emotional and nutritional wellbeing of patients, caregivers and families through every stage of illness."
+        intro={`${site.tagline}. Emotional and nutritional support for patients, caregivers and families through every stage of illness.`}
       />
 
       <section className="space-y-3">

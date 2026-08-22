@@ -1,6 +1,6 @@
 export const site = {
   name: "Afya Companion",
-  tagline: "Support through every stage of illness",
+  tagline: "You are not alone in your care journey",
   description:
     "Emotional, nutritional and practical support for patients, caregivers and families living with a medical condition — check-ins, screening tools, coping modules, grief support, dietetics and professional care.",
   domain: "afyacompanion.app",
