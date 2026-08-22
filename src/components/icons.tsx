@@ -200,11 +200,28 @@ export function IconDots(p: IconProps) {
   );
 }
 
-export function IconLogo(p: IconProps) {
+export function IconLogo({ width = 24, height = 24, ...rest }: IconProps) {
+  // Two-tone mark mirroring the brand badge: a turquoise heart beside a
+  // standing figure. The heart uses --primary and the figure uses --ink so
+  // both stay legible in light and dark (the figure inverts on dark surfaces).
   return (
-    <svg {...base(p)} strokeWidth={1.6}>
-      <circle cx="12" cy="12" r="8.6" />
-      <path d="M12 16.8s-4.3-2.6-4.3-5.6a2.6 2.6 0 0 1 4.3-1.8 2.6 2.6 0 0 1 4.3 1.8c0 3-4.3 5.6-4.3 5.6Z" />
+    <svg
+      viewBox="0 0 24 24"
+      width={width}
+      height={height}
+      fill="none"
+      aria-hidden
+      {...rest}
+    >
+      <path
+        fill="var(--primary)"
+        d="M7.5 16.1S2.5 12.5 2.5 9A2.7 2.7 0 0 1 7.5 7.5 2.7 2.7 0 0 1 12.5 9c0 3.5-5 7.1-5 7.1Z"
+      />
+      <g fill="var(--ink)">
+        <circle cx="17" cy="6.3" r="2.25" />
+        <path d="M13.05 12.2a0.95 0.95 0 0 0 1.15 1.48l1.4-.86-1.4-1.62-1.15 1z" />
+        <path d="M17 9.05c-1.75 0-3.05 1.35-3.05 3.15v2.4a0.95 0.95 0 0 0 1.9 0v-1.7h0.25v2.2l-0.72 3.35a1 1 0 0 0 1.95.44L17.55 18h.4l.22 1.13a1 1 0 0 0 1.95-.44l-.72-3.35v-2.2h.25v1.7a0.95 0.95 0 0 0 1.9 0v-2.4c0-1.8-1.3-3.15-3.05-3.15z" />
+      </g>
     </svg>
   );
 }
