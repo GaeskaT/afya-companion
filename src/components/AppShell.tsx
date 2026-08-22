@@ -106,7 +106,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 <span className="font-display text-base font-semibold leading-none">
                   {site.name}
                 </span>
-                <span className="text-[0.64rem] font-medium leading-tight text-primary-700">
+                <span className="whitespace-nowrap text-[0.5rem] font-medium leading-tight tracking-tight text-primary-700">
                   {site.tagline}
                 </span>
               </span>
